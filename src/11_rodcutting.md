@@ -1,15 +1,16 @@
-Input:
-    n = Length of the timber
-    price = Array of prices for lengths 1 to n
-    c = Transaction cost per cut
+Function MaxProfit(n, prices, c):
+    Declare profit[0 to n] as an array of integers
 
-Output:
-    Maximum profit
+    profit[0] = 0
 
-Steps:
-1. Initialize dp[0] = 0 (No profit for length 0).
-2. For each length i from 1 to n:
-       a. Set dp[i] = price[i] (No cuts scenario).
-       b. For each length j from 1 to i:
-              dp[i] = max(dp[i], price[j] + dp[i - j] - c)
-3. Return dp[n].
+    For length from 1 to n:
+        max_profit = -infinity  // Start with a very low value for max_profit
+        For cut_length from 1 to length:
+            current_profit = prices[cut_length] + profit[length - cut_length] - c
+            max_profit = max(max_profit, current_profit)
+        EndFor
+        profit[length] = max_profit
+    EndFor
+
+    Return profit[n]
+EndFunction
